@@ -17,8 +17,9 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private Enums.genre genre;
 
+    @JoinTable
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Author> authors = new ArrayList();
+    private List<Author> authors = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -40,7 +41,7 @@ public class Book {
         return ISBN;
     }
 
-    public void setISBN(String year) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
     public Enums.genre getGenre() {

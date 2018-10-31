@@ -18,14 +18,16 @@ public class Author {
     @Enumerated(EnumType.STRING)
     private Enums.sex sex;
 
+    @JoinTable
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Book> books = new ArrayList();
+    private List<Book> books = new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
+    @JoinTable
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Reward> rewards = new ArrayList();
+    private List<Reward> rewards = new ArrayList<>();
 
     public Integer getId() {
         return id;
