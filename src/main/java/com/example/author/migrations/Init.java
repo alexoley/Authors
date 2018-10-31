@@ -16,12 +16,6 @@ public class Init implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Configuration hibernateConfiguration = new Configuration();
 
-        hibernateConfiguration.addAnnotatedClass(myEntity.class);
-        Reward rew = new Reward();
-        rew.setTitle("For reading");
-        rew.setYear(1885);
-        rewardRepository.save(rew);
     }
 }
