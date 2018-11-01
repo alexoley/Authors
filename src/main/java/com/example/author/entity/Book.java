@@ -1,5 +1,7 @@
 package com.example.author.entity;
 
+import com.example.author.entity.enums.Enums;
+
 import javax.persistence.*;
 import java.util.*;
 

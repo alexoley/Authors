@@ -1,4 +1,4 @@
-package com.example.author.entity;
+package com.example.author.entity.enums;
 
 public class Enums {
 

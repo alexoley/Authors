@@ -1,6 +1,6 @@
 package com.example.author.entity;
 
-//import com.mysql.fabric.xmlrpc.base.Data;
+import com.example.author.entity.enums.Enums;
 
 import javax.persistence.*;
 import java.util.*;
