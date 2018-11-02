@@ -1,14 +1,18 @@
+drop TABLE author_book;
+drop TABLE reward;
+drop TABLE author;
+drop TABLE book;
 CREATE TABLE IF NOT EXISTS author (
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT NOT NULL,
     birth_date DATE,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
     sex VARCHAR(255),
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS book (
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT NOT NULL,
     isbn VARCHAR(255),
     genre VARCHAR(255),
     title VARCHAR(255),
@@ -16,24 +20,18 @@ CREATE TABLE IF NOT EXISTS book (
 )  ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS reward (
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(255),
     year INT,
-    PRIMARY KEY (id)
+    author_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (author_id) REFERENCES author (id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS author_books (
-    author_id INT,
-    books_id INT,
-    PRIMARY KEY (author_id,books_id)
-)  ENGINE=INNODB;
-
-CREATE TABLE IF NOT EXISTS author_rewards (
-    author_id INT,
-    rewards_id INT
-)  ENGINE=INNODB;
-
-CREATE TABLE IF NOT EXISTS book_authors (
-    books_id INT,
-    authors_id INT
+CREATE TABLE IF NOT EXISTS author_book (
+    author_id INT NOT NULL,
+    book_id INT NOT NULL,
+    PRIMARY KEY (author_id,book_id),
+    FOREIGN KEY (book_id) REFERENCES book (id),
+    FOREIGN KEY (author_id) REFERENCES author (id)
 )  ENGINE=INNODB;

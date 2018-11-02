@@ -1,40 +1,71 @@
 package com.example.author.controllers;
 
+import com.example.author.entity.Author;
+import com.example.author.entity.Reward;
 import com.example.author.repositories.AuthorRepository;
+import com.example.author.repositories.RewardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@Controller    // This means that this class is a Controller
-@RequestMapping(path="/author") // This means URL's start with /demo (after Application path)
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.Optional;
+
+@Controller
+@RequestMapping(path="/author")
 @Secured("USER")
 public class AuthorController {
 
     @Autowired
     private AuthorRepository authorRepository;
 
-    @GetMapping(path="/info/short/{id}") // Map ONLY GET Requests
+    @Autowired
+    private RewardRepository rewardRepository;
+
+    @GetMapping(path="")
     @ResponseBody
-    public int shortInfo (@PathVariable int id) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return id;
+    public Iterable<Author>
+    getAllAuthors(){
+        return authorRepository.findAll();
+    }
+
+    @GetMapping(path="/info/short/{id}")
+    @ResponseBody
+    public Optional<Author> shortInfo (@PathVariable Integer id) {
+        return authorRepository.shortInfo();
 
     }
 
-    @GetMapping(path="/add") // Map ONLY GET Requests
-    public @ResponseBody
-    String addNewUser () {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return "author";
+    @GetMapping(path="/{id}")
+    @ResponseBody
+    public Optional<Author> getAuthor (@PathVariable Integer id) {
+        return authorRepository.findById(id);
 
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody String getAllUsers() {
-        // This returns a JSON or XML with the users
-        return "allauthor";
+    @PostMapping("")
+    public ResponseEntity<Object> createNote(@Valid @RequestBody Author author) {
+        Author savedAuthor = authorRepository.save(author);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(savedAuthor.getId()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping(path="/reward")
+    @ResponseBody
+    public Iterable<Reward> getAllRewards () {
+        return rewardRepository.findAll();
+
+    }
+
+    @GetMapping(path="/reward/{id}")
+    @ResponseBody
+    public Optional<Reward> getReward (@PathVariable Integer id) {
+        return rewardRepository.findById(id);
+
     }
 }

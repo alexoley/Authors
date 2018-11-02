@@ -13,6 +13,10 @@ public class Reward {
 
     private String title;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="author_id", nullable=false)
+    private Author author;
+
     public Integer getId() {
         return id;
     }
@@ -36,4 +40,6 @@ public class Reward {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Reward() {}
 }

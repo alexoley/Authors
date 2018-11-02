@@ -5,5 +5,5 @@ public class Enums {
     public enum sex { MALE, FEMALE }
 
     public enum genre {Science, Drama, Mystery, Health,
-        Religion, Poetry, Encyclopedias, Comics}
+        Religion, Poetry, Encyclopedias, Comics, Nonfiction, Philosophy, Psychology, Novel}
 }

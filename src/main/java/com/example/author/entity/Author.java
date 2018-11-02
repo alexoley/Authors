@@ -1,11 +1,12 @@
 package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.*;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class Author {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,16 +19,19 @@ public class Author {
     @Enumerated(EnumType.STRING)
     private Enums.sex sex;
 
-    @JoinTable
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Book> books = new ArrayList<>();
+    @JsonIgnoreProperties("authors")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "author_book",
+    joinColumns = { @JoinColumn(name = "author_id") },
+    inverseJoinColumns = { @JoinColumn(name = "book_id") }
+    )
+    List<Book> books = new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @JoinTable
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Reward> rewards = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author", cascade={CascadeType.ALL})
+    private List<Reward> rewards;
 
     public Integer getId() {
         return id;
@@ -85,4 +89,5 @@ public class Author {
         this.rewards = new ArrayList<>(rewards);
     }
 
+    public Author() {}
 }

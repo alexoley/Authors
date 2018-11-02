@@ -1,6 +1,7 @@
 package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.*;
@@ -19,8 +20,8 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private Enums.genre genre;
 
-    @JoinTable
-    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("books")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
     public Integer getId() {
