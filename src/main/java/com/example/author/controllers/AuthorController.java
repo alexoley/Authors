@@ -1,6 +1,7 @@
 package com.example.author.controllers;
 
 import com.example.author.entity.Author;
+import com.example.author.entity.AuthorShort;
 import com.example.author.entity.Reward;
 import com.example.author.repositories.AuthorRepository;
 import com.example.author.repositories.RewardRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,9 +35,9 @@ public class AuthorController {
         return authorRepository.findAll();
     }
 
-    @GetMapping(path="/info/short/{id}")
+    @GetMapping(path="/info/short")
     @ResponseBody
-    public Optional<Author> shortInfo (@PathVariable Integer id) {
+    public List<AuthorShort> shortInfo () {
         return authorRepository.shortInfo();
 
     }

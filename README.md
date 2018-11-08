@@ -51,5 +51,5 @@ curl -X GET \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: d750471d-d0c2-4a63-a2b2-634284421f18'
 ```
-`Authors.postman_collection.json locate in the root of repository.`
+_**`Authors.postman_collection.json`**_` locate in the root of repository.`
 `Import it in Postman to see all requests.`

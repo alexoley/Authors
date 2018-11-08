@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/author/info/short/1",
+					"raw": "http://localhost:8090/author/info/short",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -24,8 +24,7 @@
 					"path": [
 						"author",
 						"info",
-						"short",
-						"1"
+						"short"
 					]
 				}
 			},
@@ -64,7 +63,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/author/1",
+					"raw": "http://localhost:8090/author/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -72,7 +71,7 @@
 					"port": "8090",
 					"path": [
 						"author",
-						"1"
+						"5"
 					]
 				}
 			},
@@ -137,14 +136,14 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/author",
+					"raw": "http://localhost:8090/book",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"author"
+						"book"
 					]
 				}
 			},
@@ -181,15 +180,10 @@
 					"type": "noauth"
 				},
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"firstName\": \"HHHHH\",\"lastName\": \"GGGG\"}"
+					"raw": "{ \"firstName\":\"HHHHH\",\"lastName\":\"GGGG\",\"sex\":\"\",\"books\":[],\"birthDate\":\"\",\"rewards\":[] }"
 				},
 				"url": {
 					"raw": "http://localhost:8090/author",
@@ -200,6 +194,38 @@
 					"port": "8090",
 					"path": [
 						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Reward",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":1,\"year\":111,\"title\":\"GGGG\",\"author_id\":1}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/author/reward",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"author",
+						"reward"
 					]
 				}
 			},
