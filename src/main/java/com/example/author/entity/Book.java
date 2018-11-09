@@ -1,7 +1,9 @@
 package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
+import com.example.author.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.*;
@@ -13,6 +15,7 @@ public class Book {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
+    @JsonView(Views.Short.class)
     private String title;
 
     private String ISBN;
@@ -21,11 +24,11 @@ public class Book {
     private Enums.genre genre;
 
     @JsonIgnoreProperties("books")
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books", cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -33,7 +36,7 @@ public class Book {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -41,14 +44,15 @@ public class Book {
     }
 
     public String getISBN() {
-        return ISBN;
+        return this.ISBN;
     }
 
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
+
     public Enums.genre getGenre() {
-        return genre;
+        return this.genre;
     }
 
     public void setGenre(Enums.genre genre) {
@@ -63,4 +67,23 @@ public class Book {
         this.authors = new ArrayList<>(authors);
     }
 
+    public Book()
+    {}
+
+    public Book(String title, String ISBN, Enums.genre genre, List<Author> authors)
+    {
+        this.authors=authors;
+        this.genre=genre;
+        this.ISBN=ISBN;
+        this.title=title;
+    }
+
+    public Book(Integer id, String title, String ISBN, Enums.genre genre, List<Author> authors)
+    {
+        this.id=id;
+        this.authors=authors;
+        this.genre=genre;
+        this.ISBN=ISBN;
+        this.title=title;
+    }
 }

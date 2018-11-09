@@ -1,5 +1,6 @@
 package com.example.author.entity;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -42,4 +43,19 @@ public class Reward {
     }
 
     public Reward() {}
+
+    public Reward(Integer year, String title, Author author)
+    {
+        this.year = year;
+        this.title = title;
+        this.author = author;
+    }
+
+    public Reward(Integer id, Integer year, String title, Author author)
+    {
+        this.id = id;
+        this.year = year;
+        this.title = title;
+        this.author = author;
+    }
 }

@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/author/info/short",
+					"raw": "http://localhost:8090/author/info/short/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -24,7 +24,8 @@
 					"path": [
 						"author",
 						"info",
-						"short"
+						"short",
+						"2"
 					]
 				}
 			},
@@ -180,10 +181,15 @@
 					"type": "noauth"
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"firstName\":\"HHHHH\",\"lastName\":\"GGGG\",\"sex\":\"\",\"books\":[],\"birthDate\":\"\",\"rewards\":[] }"
+					"raw": "{ \"firstName\":\"HHHHH\",\"lastName\":\"GGGG\",\"sex\":\"MALE\",\"books\":[1,2,3],\"birthDate\":\"2016-11-11\",\"rewards\":[]}"
 				},
 				"url": {
 					"raw": "http://localhost:8090/author",
@@ -194,6 +200,37 @@
 					"port": "8090",
 					"path": [
 						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"title\":\"HHHHH\",\"ISBN\":\"GGGG\",\"genre\":\"Mystery\",\"authors\":[1,2,3]}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"book"
 					]
 				}
 			},
@@ -214,7 +251,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1,\"year\":111,\"title\":\"GGGG\",\"author_id\":1}"
+					"raw": "{\"year\":1191,\"title\":\"GAGG\",\"author_id\":5}"
 				},
 				"url": {
 					"raw": "http://localhost:8090/author/reward",
@@ -226,6 +263,103 @@
 					"path": [
 						"author",
 						"reward"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Author Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"firstName\":\"HHHHH\",\"lastName\":\"GGGG\",\"sex\":\"MALE\",\"books\":[1,2,3],\"birthDate\":\"2016-11-11\",\"rewards\":[]}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/author/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"author",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"title\":\"HHHHH\",\"ISBN\":\"GGGG\",\"genre\":\"Mystery\",\"authors\":[1,2,3]}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/book/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Reward Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"year\":1191,\"title\":\"GAGG\",\"author_id\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/author/reward/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"author",
+						"reward",
+						"1"
 					]
 				}
 			},
