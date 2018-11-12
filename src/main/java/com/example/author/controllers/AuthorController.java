@@ -1,13 +1,12 @@
 package com.example.author.controllers;
 
 import com.example.author.entity.Author;
+import com.example.author.entity.AuthorShort;
 import com.example.author.entity.Reward;
 import com.example.author.repositories.AuthorRepository;
 import com.example.author.repositories.RewardRepository;
 import com.example.author.services.AuthorService;
 import com.example.author.services.RewardService;
-import com.example.author.view.Views;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -48,10 +45,9 @@ public class AuthorController {
     }
 
     @GetMapping(path="/info/short/{id}")
-    @JsonView(Views.Short.class)
     @ResponseBody
-    public Optional<Author> shortInfo (@PathVariable Integer id) {
-        return authorRepository.findById(id);
+    public List<AuthorShort> shortInfo (@PathVariable Integer id) {
+        return authorRepository.findShortById(id);
 
     }
 

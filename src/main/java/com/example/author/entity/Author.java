@@ -1,10 +1,7 @@
 package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
-import com.example.author.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.*;
@@ -15,16 +12,14 @@ public class Author {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    @JsonView(Views.Short.class)
+
     private String firstName;
 
-    @JsonView(Views.Short.class)
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     private Enums.sex sex;
 
-    @JsonView(Views.Short.class)
     @JsonIgnoreProperties("authors")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "author_book",
@@ -35,10 +30,6 @@ public class Author {
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-
-    @JsonView(Views.Short.class)
-    @Formula("FLOOR(DATEDIFF(CURRENT_DATE, birth_date )/365)")
-    private int age;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
     private List<Reward> rewards;
@@ -89,10 +80,6 @@ public class Author {
 
     public void setBirthDate(java.util.Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public int getAge() {
-        return this.age;
     }
 
     public List<Reward> getRewards() {
