@@ -90,6 +90,15 @@ public class Author {
         this.rewards = new ArrayList<>(rewards);
     }
 
+    /*@Transient
+    public Integer getAge() {
+        if(getBirthDate()!=null){
+            Date now = new Date();
+            return (int)((now.getTime() - getBirthDate().getTime())/(1000*60*60));
+        }
+        return null;
+    }*/
+
     public Author() {}
 
     public Author(String firstName, String lastName, Enums.sex sex, List<Book> books

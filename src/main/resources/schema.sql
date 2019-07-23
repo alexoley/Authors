@@ -1,7 +1,3 @@
-drop TABLE author_book;
-drop TABLE reward;
-drop TABLE author;
-drop TABLE book;
 CREATE TABLE IF NOT EXISTS author (
     id INT AUTO_INCREMENT NOT NULL,
     birth_date DATE,
