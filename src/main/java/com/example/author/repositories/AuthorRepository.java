@@ -12,4 +12,6 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
     Optional<AuthorShort> findShortById(Integer id);
 
+
+
 }

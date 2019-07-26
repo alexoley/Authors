@@ -48,7 +48,6 @@ public class AuthorController {
     @ResponseBody
     public Optional<AuthorShort> shortInfo (@PathVariable Integer id) {
         return authorRepository.findShortById(id);
-
     }
 
     @GetMapping(path="/{id}")

@@ -1,6 +1,7 @@
 package com.example.author.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,18 +14,8 @@ public interface AuthorShort {
 
     List<BookTitle> getBooks();
 
-    @JsonIgnore
-    @Temporal(TemporalType.DATE)
-    Date getBirthDate();
-
-    default Integer getAge(){
-        if(getBirthDate()!=null){
-            //Date now = new Date();
-            //return ((int)((Calendar.getInstance().getTime().getTime() + getBirthDate().getTime())/10000));
-            return (int)(getBirthDate().getTime()/(1000*60*60*24*365));
-        }
-        return null;
-    }
+    @Value("#{@authorShortUtil.getAgeUt(target)}")
+    Long getAge();
 
     interface BookTitle {
         String getTitle();
