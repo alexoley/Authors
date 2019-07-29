@@ -1,15 +1,12 @@
 package com.example.author.controllers;
 
-import com.example.author.entity.Author;
 import com.example.author.entity.Book;
-import com.example.author.entity.Reward;
 import com.example.author.repositories.BookRepository;
 import com.example.author.services.BookService;
-import com.example.author.view.Views;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -25,60 +22,30 @@ import java.util.Optional;
 public class BookController {
 
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
+    @Qualifier("bookServiceImpl")
     private BookService bookService;
 
     @GetMapping(path="")
     @ResponseBody
-    public Iterable<Book>
-    getAllBooks(){
-        return bookRepository.findAll();
+    public Iterable<Book> getAllBooks(){
+        return bookService.getAllBooks();
     }
 
     @GetMapping(path="/{id}")
     @ResponseBody
-    public Optional<Book> getAuthor (@PathVariable Integer id) {
-        return bookRepository.findById(id);
-
+    public Optional<Book> getBook (@PathVariable Integer id) {
+        return bookService.getBook(id);
     }
 
     @PostMapping("")
     public ResponseEntity<Book> createBook(@RequestBody String json) {
-        ObjectMapper mapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(Book.class, bookService);
-        mapper.registerModule(module);
-        try {
-            Book book = mapper.readValue(json, Book.class);
-            Book savedBook = bookRepository.save(book);
-            return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
-        }
-        catch(IOException e)
-        {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return bookService.createBook(json);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> createReward(@RequestBody String json,
-                                               @PathVariable Integer id) {
-        ObjectMapper mapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(Book.class, bookService);
-        mapper.registerModule(module);
-        try {
-            Book book = mapper.readValue(json, Book.class);
-            book.setId(id);
-            Book savedBook = bookRepository.save(book);
-            return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
-        }
-        catch(IOException e)
-        {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
+    public ResponseEntity<Book> updateBook(@RequestBody String json,
+                                           @PathVariable Integer id) {
+        return bookService.updateBook(json, id);
     }
 
 

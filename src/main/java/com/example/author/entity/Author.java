@@ -2,7 +2,6 @@ package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.*;
 
