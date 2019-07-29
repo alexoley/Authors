@@ -1,40 +1,17 @@
 package com.example.author.services;
 
-import com.example.author.entity.Author;
 import com.example.author.entity.Reward;
-import com.example.author.repositories.AuthorRepository;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.IntNode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
-import java.io.IOException;
+import java.util.Optional;
 
-@Service
-public class RewardService extends StdDeserializer<Reward> {
+public interface RewardService{
 
-    @Autowired
-    private AuthorRepository authorRepository;
+    ResponseEntity<Reward> createReward(String json);
 
-    public RewardService() {
-        this(null);
-    }
+    ResponseEntity<Reward> updateReward(String json, Integer id);
 
-    public RewardService(Class<?> vc) {
-        super(vc);
-    }
+    Optional<Reward> getReward (Integer id);
 
-    @Override
-    public Reward deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException{
-        JsonNode node = jp.getCodec().readTree(jp);
-        int year = (Integer) ((IntNode) node.get("year")).numberValue();
-        String title = node.get("title").asText();
-        int author_id = (Integer) ((IntNode) node.get("author_id")).numberValue();
-        return new Reward(year, title, authorRepository.findById(author_id).get());
-    }
+    Iterable<Reward> getAllRewards ();
 }

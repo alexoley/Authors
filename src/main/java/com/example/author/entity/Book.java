@@ -1,10 +1,7 @@
 package com.example.author.entity;
 
 import com.example.author.entity.enums.Enums;
-import com.example.author.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -15,7 +12,6 @@ public class Book {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @JsonView(Views.Short.class)
     private String title;
 
     private String ISBN;
